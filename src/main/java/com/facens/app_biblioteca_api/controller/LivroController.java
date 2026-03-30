@@ -25,7 +25,7 @@ public class LivroController {
 
     private final LivroService livroService;
 
-    public livroController(LivroService livroService){
+    public LivroController(LivroService livroService){
         this.livroService = livroService;
     }
 
@@ -44,14 +44,14 @@ public class LivroController {
 
     
     @GetMapping("/{id}") //o {id} é utilizado para mapear uma requisição GET que incluí um paramêtro de caminho (path variable)
-    public Livro buscaPorId(@PathVariable Long Id) {
-        return livroService.buscaPorId(id);
+    public Livro buscarPorId(@PathVariable Long id) {
+        return livroService.buscarPorId(id);
 
     }
 
     @PostMapping
-    @ResponseStatus(Http.Status.CREATED)
-    public Livro criaLivro(RequestBody Livro livro) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Livro criarLivro(@RequestBody Livro livro) {
         return livroService.criar(livro);
     }
 
@@ -60,10 +60,10 @@ public class LivroController {
         return livroService.atualizar(id,livro);
     }
 
-    @DeleteMapping
-    @ResponseStatus(Http.Status.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removerLivro(@PathVariable Long id) {
-        return livroService.deletar(id);
+         livroService.deletar(id);
     }
 
     @PutMapping("/{id}/emprestar")
